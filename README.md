@@ -2,6 +2,7 @@
 
 ## 🔗 Live Demo
 [View Dashboard]([https://username.github.io/repo-name/](https://marshallvd.github.io/Sistem-Monitoring-Kualitas-Data-Berbasis-AI-untuk-Program-Gratis/))
+[View Dashboard](https://username.github.io/repo-name/)
 
 ## 📊 Features
 - Combined Quality Report
