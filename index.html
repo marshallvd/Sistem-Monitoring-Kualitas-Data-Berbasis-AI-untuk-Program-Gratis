@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Integrated Data Quality Report - MBG Data</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 30px;
+            line-height: 1.6;
+            color: #2c3e50;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 25px;
+            box-shadow: 0 25px 70px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 20px,
+                rgba(255,255,255,0.05) 20px,
+                rgba(255,255,255,0.05) 40px
+            );
+            animation: movePattern 30s linear infinite;
+        }
+
+        @keyframes movePattern {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(70px, 70px); }
+        }
+
+        .header h1 {
+            font-size: 3.5em;
+            margin-bottom: 15px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .header .subtitle {
+            font-size: 1.4em;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+            margin-bottom: 10px;
+        }
+
+        .header .meta {
+            margin-top: 20px;
+            opacity: 0.85;
+            font-size: 1em;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content {
+            padding: 60px;
+        }
+
+        .hero-score {
+            background: linear-gradient(135deg, #2ecc71 0%, #2ecc71dd 100%);
+            color: white;
+            padding: 70px;
+            border-radius: 25px;
+            text-align: center;
+            margin: 50px 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .hero-score::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.15) 0%, transparent 50%);
+        }
+
+        .hero-score h2 {
+            font-size: 1.8em;
+            margin-bottom: 30px;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-score .score {
+            font-size: 8em;
+            font-weight: bold;
+            margin: 40px 0;
+            text-shadow: 4px 4px 8px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
+            letter-spacing: -5px;
+        }
+
+        .hero-score .grade {
+            font-size: 2.5em;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .comparison-section {
+            margin: 60px 0;
+        }
+
+        .comparison-section h2 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 40px;
+            margin: 40px 0;
+        }
+
+        .method-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 20px;
+            padding: 45px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .method-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+        }
+
+        .method-card.sensor::before {
+            background: linear-gradient(90deg, #9b59b6, #e74c3c);
+        }
+
+        .method-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+        }
+
+        .method-card h3 {
+            font-size: 2em;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .method-card .approach {
+            color: #7f8c8d;
+            font-style: italic;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .method-card .score-display {
+            font-size: 5em;
+            font-weight: bold;
+            text-align: center;
+            margin: 35px 0;
+            background: linear-gradient(135deg, #3498db, #2ecc71);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .method-card.sensor .score-display {
+            background: linear-gradient(135deg, #9b59b6, #e74c3c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .method-card .metrics {
+            display: grid;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .metric-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 25px;
+            background: white;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .metric-row:hover {
+            background: #f8f9fa;
+            transform: translateX(8px);
+        }
+
+        .metric-label {
+            font-size: 1.1em;
+            color: #5a6c7d;
+            font-weight: 500;
+        }
+
+        .metric-value {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .metric-value.success {
+            color: #27ae60;
+        }
+
+        .metric-value.error {
+            color: #e74c3c;
+        }
+
+        .stats-overview {
+            background: #f8f9fa;
+            border-radius: 20px;
+            padding: 50px;
+            margin: 50px 0;
+        }
+
+        .stats-overview h2 {
+            color: #2c3e50;
+            font-size: 2.2em;
+            margin-bottom: 35px;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.25);
+            transform: translateY(-5px);
+        }
+
+        .stat-card .icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        .stat-card .label {
+            color: #7f8c8d;
+            font-size: 0.95em;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            margin-bottom: 12px;
+        }
+
+        .stat-card .value {
+            color: #2c3e50;
+            font-size: 2.8em;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        .comparison-viz {
+            background: white;
+            border-radius: 20px;
+            padding: 45px;
+            margin: 50px 0;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .comparison-viz h3 {
+            color: #2c3e50;
+            font-size: 1.8em;
+            margin-bottom: 30px;
+        }
+
+        .bar-comparison {
+            display: grid;
+            gap: 25px;
+        }
+
+        .bar-item {
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .bar-label {
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 1.1em;
+        }
+
+        .bar-container {
+            background: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            height: 45px;
+            position: relative;
+        }
+
+        .bar-fill {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 15px;
+            color: white;
+            font-weight: bold;
+            transition: width 1.5s ease;
+            font-size: 1.1em;
+        }
+
+        .bar-fill.soda {
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+        }
+
+        .bar-fill.sensor {
+            background: linear-gradient(90deg, #9b59b6, #e74c3c);
+        }
+
+        .bar-fill.combined {
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        .recommendations-container {
+            margin: 60px 0;
+        }
+
+        .rec-section {
+            margin-bottom: 40px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .rec-header {
+            padding: 30px;
+            color: white;
+        }
+
+        .critical-section .rec-header {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+        }
+
+        .error-section .rec-header {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+        }
+
+        .warning-section .rec-header {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+        }
+
+        .rec-header h3 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .rec-subtitle {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+
+        .issues-list {
+            background: white;
+            padding: 30px;
+        }
+
+        .issue-card {
+            display: flex;
+            gap: 20px;
+            padding: 25px;
+            margin-bottom: 15px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 5px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+
+        .issue-card:hover {
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transform: translateX(5px);
+        }
+
+        .issue-card.critical {
+            border-left-color: #e74c3c;
+            background: linear-gradient(to right, #fef5f5, #f8f9fa);
+        }
+
+        .issue-card.error {
+            border-left-color: #f39c12;
+            background: linear-gradient(to right, #fffbf0, #f8f9fa);
+        }
+
+        .issue-card.warning {
+            border-left-color: #3498db;
+            background: linear-gradient(to right, #f0f8ff, #f8f9fa);
+        }
+
+        .issue-number {
+            background: #667eea;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2em;
+            flex-shrink: 0;
+        }
+
+        .issue-content {
+            flex: 1;
+        }
+
+        .issue-title {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .issue-source {
+            color: #7f8c8d;
+            font-size: 0.95em;
+            margin-bottom: 12px;
+        }
+
+        .issue-metrics {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .metric-badge {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+
+        .metric-badge.actual {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .metric-badge.expected {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .success-message {
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+            border-left: 6px solid #27ae60;
+            padding: 50px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(39, 174, 96, 0.2);
+            margin: 60px 0;
+        }
+
+        .success-icon {
+            font-size: 5em;
+            margin-bottom: 20px;
+        }
+
+        .success-message h3 {
+            color: #155724;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .success-message p {
+            color: #155724;
+            font-size: 1.3em;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+
+        .success-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .success-stat {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .stat-icon {
+            font-size: 2.5em;
+        }
+
+        .stat-label {
+            color: #155724;
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+
+        .dimension-comparison-grid {
+            display: grid;
+            gap: 40px;
+            margin: 50px 0;
+        }
+
+        .framework-section {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .framework-title {
+            color: #2c3e50;
+            font-size: 2em;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .dimension-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-left: 5px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+
+        .dimension-card:hover {
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transform: translateX(5px);
+        }
+
+        .dimension-card.excellent {
+            border-left-color: #27ae60;
+            background: linear-gradient(to right, #f0f9f4, #f8f9fa);
+        }
+
+        .dimension-card.good {
+            border-left-color: #f39c12;
+            background: linear-gradient(to right, #fffbf0, #f8f9fa);
+        }
+
+        .dimension-card.poor {
+            border-left-color: #e74c3c;
+            background: linear-gradient(to right, #fef5f5, #f8f9fa);
+        }
+
+        .dimension-card.critical {
+            border-left-color: #c0392b;
+            background: linear-gradient(to right, #fee, #f8f9fa);
+        }
+
+        .dim-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .dim-name {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .critical-badge {
+            display: inline-block;
+            background: #e74c3c;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .dim-score {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #667eea;
+            margin: 15px 0;
+        }
+
+        .dim-progress {
+            margin-top: 15px;
+        }
+
+        .progress-bar {
+            background: #e9ecef;
+            border-radius: 10px;
+            height: 12px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 10px;
+            transition: width 1s ease;
+        }
+
+        .dim-stats {
+            color: #7f8c8d;
+            font-size: 0.95em;
+        }
+
+        .methodology {
+            background: #fff;
+            padding: 50px;
+            border-radius: 20px;
+            margin: 60px 0;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .methodology h2 {
+            color: #2c3e50;
+            font-size: 2.2em;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .methodology p {
+            color: #495057;
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin: 20px 0;
+        }
+
+        .methodology strong {
+            color: #2c3e50;
+        }
+
+        .footer {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 50px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .footer h3 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+        }
+
+        .footer p {
+            margin: 12px 0;
+            opacity: 0.9;
+            font-size: 1.05em;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2.2em; }
+            .hero-score .score { font-size: 5em; }
+            .comparison-grid { grid-template-columns: 1fr; }
+            .method-card .score-display { font-size: 3.5em; }
+            .bar-item { grid-template-columns: 1fr; }
+        }
+        .academic-header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 25px 50px;
+            border-bottom: 5px solid #f39c12;
+        }
+        .academic-info {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            align-items: center;
+        }
+        .course-info h2 {
+            font-size: 1.4em;
+            margin-bottom: 8px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .course-info p {
+            margin: 5px 0;
+            opacity: 0.95;
+            font-size: 0.95em;
+        }
+        .student-info {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+        .student-info h3 {
+            font-size: 1.1em;
+            margin-bottom: 12px;
+            border-bottom: 2px solid rgba(255,255,255,0.3);
+            padding-bottom: 8px;
+        }
+        .student-info p {
+            margin: 6px 0;
+            font-size: 0.9em;
+        }
+        .tools-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-top: 10px;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+        .project-description {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 25px 50px;
+            border-left: 5px solid #3498db;
+        }
+        .project-description h3 {
+            color: #2c3e50;
+            font-size: 1.3em;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .project-description p {
+            color: #34495e;
+            line-height: 1.7;
+            font-size: 0.95em;
+        }
+        .footer-enhanced {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 40px 50px;
+            border-top: 5px solid #f39c12;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 25px;
+        }
+        .footer-section h4 {
+            font-size: 1.1em;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid rgba(255,255,255,0.3);
+        }
+        .footer-section p {
+            margin: 6px 0;
+            opacity: 0.9;
+            font-size: 0.9em;
+        }
+        .footer-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            margin: 3px;
+        }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            opacity: 0.85;
+        }
+        @media (max-width: 768px) {
+            .academic-info, .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            .academic-header, .project-description, .footer-enhanced {
+                padding: 20px 25px;
+            }
+        }
+
+        .navbar {
+        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        padding: 0;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        border-bottom: 4px solid #f39c12;
+    }
+
+    .navbar-container {
+        max-width: 1600px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 50px;
+    }
+
+    .navbar-brand {
+        color: white;
+        font-size: 1.5em;
+        font-weight: 700;
+        padding: 20px 0;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+    }
+
+    .navbar-brand:hover {
+        opacity: 0.9;
+    }
+
+    .navbar-menu {
+        display: flex;
+        gap: 0;
+        list-style: none;
+    }
+
+    .navbar-item {
+        position: relative;
+    }
+
+    .navbar-link {
+        color: white;
+        text-decoration: none;
+        padding: 28px 30px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 600;
+        font-size: 1em;
+        transition: all 0.3s ease;
+        border-bottom: 4px solid transparent;
+    }
+
+    .navbar-link:hover {
+        background: rgba(255,255,255,0.1);
+        border-bottom-color: #f39c12;
+    }
+
+    .navbar-link.active {
+        background: rgba(255,255,255,0.15);
+        border-bottom-color: #f39c12;
+    }
+
+    .navbar-icon {
+        font-size: 1.2em;
+    }
+
+    /* Mobile Responsive */
+    .navbar-toggle {
+        display: none;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.8em;
+        cursor: pointer;
+        padding: 10px;
+    }
+
+    @media (max-width: 768px) {
+        .navbar-container {
+            padding: 0 20px;
+            flex-wrap: wrap;
+        }
+
+        .navbar-toggle {
+            display: block;
+        }
+
+        .navbar-menu {
+            display: none;
+            width: 100%;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .navbar-menu.active {
+            display: flex;
+        }
+
+        .navbar-link {
+            padding: 20px 30px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            border-left: 4px solid transparent;
+        }
+
+        .navbar-link:hover,
+        .navbar-link.active {
+            border-left-color: #f39c12;
+            border-bottom-color: transparent;
+        }
+    }
+
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="index.html" class="navbar-brand">
+                <span>🔍</span>
+                <span>Data Quality Dashboard</span>
+            </a>
+            
+            <button class="navbar-toggle" onclick="toggleMenu()">
+                ☰
+            </button>
+            
+            <ul class="navbar-menu" id="navbarMenu">
+                <li class="navbar-item">
+                    <a href="index.html" class="navbar-link" data-page="index">
+                        <span class="navbar-icon">📊</span>
+                        <span>Combined Report</span>
+                    </a>
+                </li>
+                <li class="navbar-item">
+                    <a href="soda.html" class="navbar-link" data-page="soda">
+                        <span class="navbar-icon">🔭</span>
+                        <span>Soda Core</span>
+                    </a>
+                </li>
+                <li class="navbar-item">
+                    <a href="dqops.html" class="navbar-link" data-page="dqops">
+                        <span class="navbar-icon">🔬</span>
+                        <span>DQOps Sensors</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <!-- HEADER AKADEMIK -->
+        <div class="academic-header">
+            <div class="academic-info">
+                <div class="course-info">
+                    <h2>📚 ANALISIS BISNIS DATA PERUSAHAAN</h2>
+                    <p><strong>Judul Tugas:</strong> Aplikasi 8 - Sistem Monitoring Kualitas Data Berbasis AI untuk Program Gratis</p>
+                    <p><strong>Fokus:</strong> Otomatisasi deteksi anomali data distribusi makanan bergizi dengan AI untuk rekomendasi perbaikan</p>
+                    <div class="tools-badge">🔧 Tools: Soda Core (Observability) & DQOps (Testing Sensor-Based)</div>
+                </div>
+                <div class="student-info">
+                    <h3>👥 Tim Mahasiswa</h3>
+                    <p><strong>202022510021</strong><br>MADE MARSHALL VIRA DEVA</p>
+                    <p><strong>202022420034</strong><br>IRFAN VENNY RAHMAYANTI</p>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- HEADER REPORT -->
+        <div class="header">
+            <h1>🔍 Laporan Analisis Kualitas Data Komprehensif</h1>
+            <div class="subtitle">Perbandingan Framework: Soda Core (Observability) vs DQOps (Sensor Testing)</div>
+            <div class="meta">
+                Dataset: Data MBG (244 baris × 18 kolom)<br>
+                Pendekatan: Validasi Berlapis dengan AI-Powered Recommendations<br>
+                Dibuat: Sunday, November 30, 2025 at 17:41:57
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- Hero Score -->
+            <div class="hero-score">
+                <h2>🎯 Combined Quality Score</h2>
+                <div class="score">93.1</div>
+                <div class="grade">VERY GOOD ✅</div>
+            </div>
+
+            <!-- Comparison Section -->
+            <div class="comparison-section">
+                <h2>⚖️ Method Comparison</h2>
+                <div class="comparison-grid">
+                    <!-- Soda Core Card -->
+                    <div class="method-card">
+                        <h3>📊 Soda Core</h3>
+                        <div class="approach">Data Observability & Continuous Monitoring</div>
+                        <div class="score-display">92.3</div>
+                        <div class="metrics">
+                            <div class="metric-row">
+                                <span class="metric-label">Total Checks</span>
+                                <span class="metric-value">26</span>
+                            </div>
+                            <div class="metric-row">
+                                <span class="metric-label">Passed</span>
+                                <span class="metric-value success">✅ 24</span>
+                            </div>
+                            <div class="metric-row">
+                                <span class="metric-label">Failed</span>
+                                <span class="metric-value error">❌ 2</span>
+                            </div>
+                            <div class="metric-row">
+                                <span class="metric-label">Success Rate</span>
+                                <span class="metric-value success">92.3%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- DQOps Sensors Card -->
+                    <div class="method-card sensor">
+                        <h3>🔬 DQOps Sensors</h3>
+                        <div class="approach">Deep Sensor-Based Testing</div>
+                        <div class="score-display">93.5</div>
+                        <div class="metrics">
+                            <div class="metric-row">
+                                <span class="metric-label">Total Tests</span>
+                                <span class="metric-value">31</span>
+                            </div>
+                            <div class="metric-row">
+                                <span class="metric-label">Passed</span>
+                                <span class="metric-value success">✅ 29</span>
+                            </div>
+                            <div class="metric-row">
+                                <span class="metric-label">Failed</span>
+                                <span class="metric-value error">❌ 2</span>
+                            </div>
+                            <div class="metric-row">
+                                <span class="metric-label">Critical Issues</span>
+                                <span class="metric-value error">🚨 1</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Visual Comparison -->
+            <div class="comparison-viz">
+                <h3>📊 Score Comparison Visualization</h3>
+                <div class="bar-comparison">
+                    <div class="bar-item">
+                        <div class="bar-label">Soda Core</div>
+                        <div class="bar-container">
+                            <div class="bar-fill soda" style="width: 92.3%;">
+                                92.3%
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bar-item">
+                        <div class="bar-label">DQOps Sensors</div>
+                        <div class="bar-container">
+                            <div class="bar-fill sensor" style="width: 93.5%;">
+                                93.5%
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bar-item">
+                        <div class="bar-label">Combined</div>
+                        <div class="bar-container">
+                            <div class="bar-fill combined" style="width: 93.1%;">
+                                93.1%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Statistics Overview -->
+            <div class="stats-overview">
+                <h2>📈 Combined Statistics</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="icon">🎯</div>
+                        <div class="label">Total Validations</div>
+                        <div class="value">57</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="icon">✅</div>
+                        <div class="label">Total Passed</div>
+                        <div class="value" style="color: #27ae60;">53</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="icon">❌</div>
+                        <div class="label">Total Failed</div>
+                        <div class="value" style="color: #e74c3c;">4</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="icon">📊</div>
+                        <div class="label">Success Rate</div>
+                        <div class="value" style="color: #3498db;">93.0%</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recommendations -->
+            <h2 style="text-align: center; color: #2c3e50; font-size: 2.5em; margin: 60px 0 40px; border-bottom: 3px solid #667eea; padding-bottom: 20px;">
+                💡 Recommendations & Issues
+            </h2>
+            <div class="recommendations-container">
+        <div class="rec-section critical-section">
+            <div class="rec-header">
+                <h3>🚨 Critical Issues (1)</h3>
+                <p class="rec-subtitle">Must be fixed immediately - blocking issues</p>
+            </div>
+            <div class="issues-list">
+        
+            <div class="issue-card critical">
+                <div class="issue-number">1</div>
+                <div class="issue-content">
+                    <div class="issue-title">word_count_min_50</div>
+                    <div class="issue-source">Source: Accuracy Sensor | Data Accuracy</div>
+                    <div class="issue-metrics">
+                        <span class="metric-badge actual">Current: 42 words</span>
+                        <span class="metric-badge expected">Required: ≥50 words</span>
+                    </div>
+                </div>
+            </div>
+            </div></div>
+        <div class="rec-section error-section">
+            <div class="rec-header">
+                <h3>⚠️ High Priority Issues (1)</h3>
+                <p class="rec-subtitle">Should be fixed soon - impacts quality</p>
+            </div>
+            <div class="issues-list">
+        
+            <div class="issue-card error">
+                <div class="issue-number">1</div>
+                <div class="issue-content">
+                    <div class="issue-title">Word count min ≥50 words</div>
+                    <div class="issue-source">Source: Soda Core | Accuracy</div>
+                    <div class="issue-metrics">
+                        <span class="metric-badge actual">Current: 42 words</span>
+                        <span class="metric-badge expected">Target: ≥50</span>
+                    </div>
+                </div>
+            </div>
+            </div></div>
+        <div class="rec-section warning-section">
+            <div class="rec-header">
+                <h3>⚡ Improvement Opportunities (1)</h3>
+                <p class="rec-subtitle">Nice to fix - enhances quality</p>
+            </div>
+            <div class="issues-list">
+        
+            <div class="issue-card warning">
+                <div class="issue-number">1</div>
+                <div class="issue-content">
+                    <div class="issue-title">Category values valid</div>
+                    <div class="issue-source">Source: Soda Core | Consistency</div>
+                    <div class="issue-metrics">
+                        <span class="metric-badge actual">Current: 38 invalid</span>
+                        <span class="metric-badge expected">Target: 0</span>
+                    </div>
+                </div>
+            </div>
+            </div></div></div>
+
+            <!-- Dimension Breakdown -->
+            <h2 style="text-align: center; color: #2c3e50; font-size: 2.5em; margin: 60px 0 40px; border-bottom: 3px solid #667eea; padding-bottom: 20px;">
+                📊 Detailed Dimension Analysis
+            </h2>
+            <div class="dimension-comparison-grid"><div class="framework-section"><h3 class="framework-title">📊 Soda Core - Quality Dimensions</h3>
+            <div class="dimension-card excellent">
+                <div class="dim-icon">✅</div>
+                <div class="dim-name">Accuracy</div>
+                <div class="dim-score">90.0%</div>
+                <div class="dim-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 90.0%"></div>
+                    </div>
+                    <div class="dim-stats">9/10 checks passed</div>
+                </div>
+            </div>
+            
+            <div class="dimension-card excellent">
+                <div class="dim-icon">✅</div>
+                <div class="dim-name">Completeness</div>
+                <div class="dim-score">100.0%</div>
+                <div class="dim-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 100.0%"></div>
+                    </div>
+                    <div class="dim-stats">7/7 checks passed</div>
+                </div>
+            </div>
+            
+            <div class="dimension-card poor">
+                <div class="dim-icon">❌</div>
+                <div class="dim-name">Consistency</div>
+                <div class="dim-score">50.0%</div>
+                <div class="dim-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 50.0%"></div>
+                    </div>
+                    <div class="dim-stats">1/2 checks passed</div>
+                </div>
+            </div>
+            
+            <div class="dimension-card excellent">
+                <div class="dim-icon">✅</div>
+                <div class="dim-name">Uniqueness</div>
+                <div class="dim-score">100.0%</div>
+                <div class="dim-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 100.0%"></div>
+                    </div>
+                    <div class="dim-stats">4/4 checks passed</div>
+                </div>
+            </div>
+            
+            <div class="dimension-card excellent">
+                <div class="dim-icon">✅</div>
+                <div class="dim-name">Validity</div>
+                <div class="dim-score">100.0%</div>
+                <div class="dim-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 100.0%"></div>
+                    </div>
+                    <div class="dim-stats">3/3 checks passed</div>
+                </div>
+            </div>
+            </div><div class="framework-section"><h3 class="framework-title">🔬 DQOps - Sensor Testing</h3>
+            <div class="dimension-card critical">
+                <div class="dim-icon">🚨</div>
+                <div class="dim-name">Accuracy</div>
+                <span class="critical-badge">1 CRITICAL</span>
+                <div class="dim-score">90.9%</div>
+                <div class="dim-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 90.9090909090909%"></div>
+                    </div>
+                    <div class="dim-stats">10/11 tests passed</div>
+                </div>
+            </div>
+            
+            <div class="dimension-card excellent">
+                <div class="dim-icon">✅</div>
+                <div class="dim-name">Completeness</div>
+                
+                <div class="dim-score">100.0%</div>
+                <div class="dim-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 100.0%"></div>
+                    </div>
+                    <div class="dim-stats">6/6 tests passed</div>
+                </div>
+            </div>
+            
+            <div class="dimension-card poor">
+                <div class="dim-icon">❌</div>
+                <div class="dim-name">Consistency</div>
+                
+                <div class="dim-score">66.7%</div>
+                <div class="dim-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 66.66666666666666%"></div>
+                    </div>
+                    <div class="dim-stats">2/3 tests passed</div>
+                </div>
+            </div>
+            
+            <div class="dimension-card excellent">
+                <div class="dim-icon">✅</div>
+                <div class="dim-name">Statistical</div>
+                
+                <div class="dim-score">100.0%</div>
+                <div class="dim-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 100.0%"></div>
+                    </div>
+                    <div class="dim-stats">3/3 tests passed</div>
+                </div>
+            </div>
+            
+            <div class="dimension-card excellent">
+                <div class="dim-icon">✅</div>
+                <div class="dim-name">Uniqueness</div>
+                
+                <div class="dim-score">100.0%</div>
+                <div class="dim-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 100.0%"></div>
+                    </div>
+                    <div class="dim-stats">3/3 tests passed</div>
+                </div>
+            </div>
+            
+            <div class="dimension-card excellent">
+                <div class="dim-icon">✅</div>
+                <div class="dim-name">Validity</div>
+                
+                <div class="dim-score">100.0%</div>
+                <div class="dim-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 100.0%"></div>
+                    </div>
+                    <div class="dim-stats">5/5 tests passed</div>
+                </div>
+            </div>
+            </div></div>
+
+            <!-- Methodology -->
+            <div class="methodology">
+                <h2>🔬 Validation Methodology</h2>
+                <p><strong>Dual-Layer Approach:</strong> This report combines two complementary data quality frameworks to provide comprehensive validation coverage.</p>
+
+                <p><strong>Soda Core (Observability Layer):</strong> Provides continuous monitoring and high-level quality checks. Focuses on overall data health, completeness, and consistency across the dataset. Best for ongoing data observability and alerting.</p>
+
+                <p><strong>DQOps Sensors (Testing Layer):</strong> Implements sensor-based deep testing with granular validation rules. Detects anomalies, validates formats, and ensures data accuracy at the field level. Best for detailed quality testing and issue identification.</p>
+
+                <p><strong>Combined Scoring:</strong> The overall quality score uses a weighted average (40% Soda Core + 60% DQOps) to emphasize deep testing while maintaining observability insights. This provides a balanced view of data quality across both breadth and depth.</p>
+
+                <p><strong>Quality Dimensions Covered:</strong></p>
+                <ul style="margin-left: 40px; margin-top: 15px; line-height: 2;">
+                    <li><strong>Completeness:</strong> Missing data and null value detection</li>
+                    <li><strong>Validity:</strong> Format correctness and type validation</li>
+                    <li><strong>Accuracy:</strong> Value ranges and business rule compliance</li>
+                    <li><strong>Uniqueness:</b> Duplicate detection and key constraints</li>
+                    <li><strong>Consistency:</strong> Cross-field validation and referential integrity</li>
+                    <li><strong>Statistical Quality:</strong> Distribution analysis and outlier detection</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-enhanced">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h4>📚 Informasi Akademik</h4>
+                    <p><strong>Mata Kuliah:</strong><br>Analisis Bisnis Data Perusahaan</p>
+                    <p><strong>Aplikasi:</strong> #8 - Monitoring Kualitas Data AI</p>
+                    <p><strong>Metode:</strong> Process Improvement</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>👥 Tim Pengembang</h4>
+                    <p><strong>202022510021</strong><br>Made Marshall Vira Deva</p>
+                    <p><strong>202022420034</strong><br>Irfan Venny Rahmayanti</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>🔧 Framework & Tools</h4>
+                    <div class="footer-badge">Soda Core</div>
+                    <div class="footer-badge">DQOps</div>
+                    <div class="footer-badge">Python</div>
+                    <div class="footer-badge">Pandas</div>
+                    <div class="footer-badge">AI-Powered</div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p><strong>🏆 Framework Pengujian Sensor DQOps</strong></p>
+                <p>Didukung oleh Validasi Berbasis Sensor Mendalam dengan Threshold yang Disesuaikan</p>
+                <p>ID Laporan: 20251130_174157 | 6 Sensor × 31 Pengujian</p>
+                <p>© 2024 Proyek Kualitas Data MBG | Tugas Analisis Bisnis Data Perusahaan</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Toggle mobile menu
+        function toggleMenu() {
+            const menu = document.getElementById('navbarMenu');
+            menu.classList.toggle('active');
+        }
+
+        // Set active page on load
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            const links = document.querySelectorAll('.navbar-link');
+            
+            links.forEach(link => {
+                const linkPage = link.getAttribute('data-page') + '.html';
+                if (currentPage === linkPage || (currentPage === '' && linkPage === 'index.html')) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const navbar = document.querySelector('.navbar');
+            const menu = document.getElementById('navbarMenu');
+            const toggle = document.querySelector('.navbar-toggle');
+            
+            if (!navbar.contains(event.target)) {
+                menu.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
