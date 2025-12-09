@@ -103,12 +103,12 @@ DQMF adalah kerangka kerja sistematis untuk mengelola kualitas data organisasi.
 │         DATA QUALITY DIMENSIONS                 │
 ├─────────────────────────────────────────────────┤
 │                                                 │
-│  1. COMPLETENESS   → Kelengkapan Data          │
-│  2. VALIDITY       → Keabsahan Format          │
-│  3. ACCURACY       → Ketepatan Nilai           │
-│  4. UNIQUENESS     → Keunikan Record           │
-│  5. CONSISTENCY    → Konsistensi Relasi        │
-│  6. TIMELINESS     → Ketepatan Waktu           │
+│  1. COMPLETENESS   → Kelengkapan Data           │
+│  2. VALIDITY       → Keabsahan Format           │
+│  3. ACCURACY       → Ketepatan Nilai            │
+│  4. UNIQUENESS     → Keunikan Record            │
+│  5. CONSISTENCY    → Konsistensi Relasi         │
+│  6. TIMELINESS     → Ketepatan Waktu            │
 │                                                 │
 └─────────────────────────────────────────────────┘
 ```
