@@ -1,4 +1,4 @@
-# Sistem-Monitoring-Kualitas-Data-Berbasis-AI-untuk-Program-Gratis
+# Sistem Monitoring Kualitas Data Berbasis AI untuk Program Gratis
 
 **Mata Kuliah:** Analisis Bisnis Data Perusahaan  
 **Aplikasi:** #8 - Monitoring Kualitas Data AI  
