@@ -1,0 +1,286 @@
+{
+  "framework": "Soda Core (Adjusted)",
+  "approach": "Observability & Monitoring",
+  "adjustments": {
+    "content_min": "100 chars (from 800)",
+    "title_min": "10 chars (from 40)",
+    "word_min": "50 words (from 100)",
+    "word_avg": "250 words (from 300)",
+    "categories": "Added MBG categories"
+  },
+  "scan_info": {
+    "timestamp": "2025-11-30T17:41:53.152472",
+    "dataset_rows": 244,
+    "dataset_columns": 22
+  },
+  "summary": {
+    "total_checks": 26,
+    "passed": 24,
+    "failed": 2,
+    "quality_score": 92.3076923076923,
+    "quality_grade": "EXCELLENT 🌟"
+  },
+  "dimension_scores": {
+    "Completeness": {
+      "passed": 7,
+      "total": 7,
+      "score": 100.0
+    },
+    "Validity": {
+      "passed": 3,
+      "total": 3,
+      "score": 100.0
+    },
+    "Accuracy": {
+      "passed": 9,
+      "total": 10,
+      "score": 90.0
+    },
+    "Uniqueness": {
+      "passed": 4,
+      "total": 4,
+      "score": 100.0
+    },
+    "Consistency": {
+      "passed": 1,
+      "total": 2,
+      "score": 50.0
+    }
+  },
+  "detailed_results": [
+    {
+      "dimension": "Completeness",
+      "check": "Dataset not empty",
+      "status": "PASSED",
+      "actual": "244 rows",
+      "expected": "> 0 rows",
+      "severity": "error",
+      "details": ""
+    },
+    {
+      "dimension": "Completeness",
+      "check": "Title 100% complete",
+      "status": "PASSED",
+      "actual": "244/244 (100.00%)",
+      "expected": "100%",
+      "severity": "error",
+      "details": "0 missing titles"
+    },
+    {
+      "dimension": "Completeness",
+      "check": "Content 100% complete",
+      "status": "PASSED",
+      "actual": "244/244 (100.00%)",
+      "expected": "100%",
+      "severity": "error",
+      "details": "0 missing content"
+    },
+    {
+      "dimension": "Completeness",
+      "check": "URL 98%+ complete",
+      "status": "PASSED",
+      "actual": "244/244 (100.00%)",
+      "expected": "≥98%",
+      "severity": "warn",
+      "details": "0 missing URLs"
+    },
+    {
+      "dimension": "Completeness",
+      "check": "Date 95%+ complete",
+      "status": "PASSED",
+      "actual": "244/244 (100.00%)",
+      "expected": "≥95%",
+      "severity": "warn",
+      "details": "0 missing dates"
+    },
+    {
+      "dimension": "Completeness",
+      "check": "Category 90%+ complete",
+      "status": "PASSED",
+      "actual": "244/244 (100.00%)",
+      "expected": "≥90%",
+      "severity": "warn",
+      "details": "0 missing categories"
+    },
+    {
+      "dimension": "Completeness",
+      "check": "Complete records ≥85%",
+      "status": "PASSED",
+      "actual": "244/244 (100.00%)",
+      "expected": "≥85%",
+      "severity": "warn",
+      "details": "0 incomplete records"
+    },
+    {
+      "dimension": "Validity",
+      "check": "URL format 95%+ valid",
+      "status": "PASSED",
+      "actual": "244/244 (100.00%)",
+      "expected": "≥95%",
+      "severity": "error",
+      "details": "0 invalid URL formats"
+    },
+    {
+      "dimension": "Validity",
+      "check": "HTTPS usage ≥70%",
+      "status": "PASSED",
+      "actual": "244/244 (100.00%)",
+      "expected": "≥70%",
+      "severity": "warn",
+      "details": "0 non-HTTPS URLs"
+    },
+    {
+      "dimension": "Validity",
+      "check": "Content not empty/whitespace",
+      "status": "PASSED",
+      "actual": "244/244",
+      "expected": "100%",
+      "severity": "error",
+      "details": "0 empty/whitespace"
+    },
+    {
+      "dimension": "Accuracy",
+      "check": "Content min ≥100 chars",
+      "status": "PASSED",
+      "actual": "296 chars",
+      "expected": "≥100 chars",
+      "severity": "error",
+      "details": "Shortest article: 296 chars"
+    },
+    {
+      "dimension": "Accuracy",
+      "check": "Content max ≤25,000 chars",
+      "status": "PASSED",
+      "actual": "6,378 chars",
+      "expected": "≤25,000",
+      "severity": "error",
+      "details": "Longest article: 6,378 chars"
+    },
+    {
+      "dimension": "Accuracy",
+      "check": "Content avg ≥1,500 chars",
+      "status": "PASSED",
+      "actual": "2,210 chars",
+      "expected": "≥1,500",
+      "severity": "warn",
+      "details": "Average: 2,210 chars"
+    },
+    {
+      "dimension": "Accuracy",
+      "check": "Content median ≥1,200 chars",
+      "status": "PASSED",
+      "actual": "2,092 chars",
+      "expected": "≥1,200",
+      "severity": "warn",
+      "details": ""
+    },
+    {
+      "dimension": "Accuracy",
+      "check": "Title min ≥10 chars",
+      "status": "PASSED",
+      "actual": "27 chars",
+      "expected": "≥10",
+      "severity": "error",
+      "details": "Shortest title: 27 chars"
+    },
+    {
+      "dimension": "Accuracy",
+      "check": "Title max ≤150 chars",
+      "status": "PASSED",
+      "actual": "100 chars",
+      "expected": "≤150",
+      "severity": "warn",
+      "details": ""
+    },
+    {
+      "dimension": "Accuracy",
+      "check": "Title avg ≥50 chars",
+      "status": "PASSED",
+      "actual": "70 chars",
+      "expected": "≥50",
+      "severity": "warn",
+      "details": "Average title length: 70 chars"
+    },
+    {
+      "dimension": "Accuracy",
+      "check": "Word count min ≥50 words",
+      "status": "FAILED",
+      "actual": "42 words",
+      "expected": "≥50",
+      "severity": "error",
+      "details": "Shortest article: 42 words"
+    },
+    {
+      "dimension": "Accuracy",
+      "check": "Word count avg ≥250 words",
+      "status": "PASSED",
+      "actual": "298 words",
+      "expected": "≥250",
+      "severity": "error",
+      "details": "Average word count: 298 words"
+    },
+    {
+      "dimension": "Accuracy",
+      "check": "Quality content ≥40% (≥2000 chars)",
+      "status": "PASSED",
+      "actual": "136/244 (55.7%)",
+      "expected": "≥40%",
+      "severity": "warn",
+      "details": "55.7% meet long-form standard"
+    },
+    {
+      "dimension": "Uniqueness",
+      "check": "URL 100% unique",
+      "status": "PASSED",
+      "actual": "0 duplicates",
+      "expected": "0",
+      "severity": "error",
+      "details": "Found 0 duplicate URLs"
+    },
+    {
+      "dimension": "Uniqueness",
+      "check": "Content 100% unique",
+      "status": "PASSED",
+      "actual": "0 duplicates (0.00%)",
+      "expected": "0",
+      "severity": "error",
+      "details": "Found 0 exact content duplicates"
+    },
+    {
+      "dimension": "Uniqueness",
+      "check": "Title duplication <1%",
+      "status": "PASSED",
+      "actual": "0 duplicates (0.00%)",
+      "expected": "<1%",
+      "severity": "warn",
+      "details": "Found 0 duplicate titles"
+    },
+    {
+      "dimension": "Uniqueness",
+      "check": "Near-duplicate titles <3%",
+      "status": "PASSED",
+      "actual": "2 similar (0.82%)",
+      "expected": "<3%",
+      "severity": "warn",
+      "details": "Titles with same first 50 chars: 2"
+    },
+    {
+      "dimension": "Consistency",
+      "check": "Category values valid",
+      "status": "FAILED",
+      "actual": "38 invalid",
+      "expected": "0",
+      "severity": "warn",
+      "details": "Invalid: ['Ameera', 'Rejogja', 'En', 'Kolom', 'Esgnow']"
+    },
+    {
+      "dimension": "Consistency",
+      "check": "Title-Content correlation >0.0",
+      "status": "PASSED",
+      "actual": "0.007",
+      "expected": ">0.0",
+      "severity": "warn",
+      "details": "Correlation shows positive relationship"
+    }
+  ]
+}

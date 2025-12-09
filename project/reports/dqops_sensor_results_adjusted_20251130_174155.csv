@@ -1,0 +1,32 @@
+﻿sensor,category,test_rule,status,severity,actual,expected,details
+Completeness Sensor,Data Completeness,title_100_complete,PASSED,critical,100.00% (0 missing),100% (0 missing),CRITICAL: title must be 100% complete
+Completeness Sensor,Data Completeness,content_100_complete,PASSED,critical,100.00% (0 missing),100% (0 missing),CRITICAL: content must be 100% complete
+Completeness Sensor,Data Completeness,url_100_complete,PASSED,critical,100.00% (0 missing),100% (0 missing),CRITICAL: url must be 100% complete
+Completeness Sensor,Data Completeness,date_98_complete,PASSED,error,100.00% (0 missing),≥98%,date should be 98%+ complete
+Completeness Sensor,Data Completeness,category_98_complete,PASSED,error,100.00% (0 missing),≥98%,category should be 98%+ complete
+Completeness Sensor,Data Completeness,overall_completeness_95,PASSED,error,99.77%,≥95%,Overall dataset completeness
+Validity Sensor,Data Validity,url_format_98_valid,PASSED,critical,100.00%,≥98%,0 URLs have invalid format
+Validity Sensor,Data Validity,url_https_80,PASSED,error,100.00%,≥80%,Security: Most URLs should use HTTPS
+Validity Sensor,Data Validity,url_has_domain,PASSED,error,100.00%,≥99%,URLs must contain valid domain
+Validity Sensor,Data Validity,content_valid_text,PASSED,critical,100.00%,100%,All content must contain readable text
+Validity Sensor,Data Validity,title_valid_text,PASSED,critical,100.00%,100%,All titles must contain readable text
+Accuracy Sensor,Data Accuracy,content_min_100,PASSED,critical,296 chars,≥100 chars,Articles should be at least 100 characters
+Accuracy Sensor,Data Accuracy,content_max_25000,PASSED,error,"6,378 chars","≤25,000 chars",Exceptionally long content may indicate data quality issues
+Accuracy Sensor,Data Accuracy,content_avg_1200,PASSED,error,2211 chars,"≥1,200 chars",Average article length indicates overall content quality
+Accuracy Sensor,Data Accuracy,content_quality_50pct,PASSED,error,81.6%,≥50%,Only 199 of 244 articles meet quality length standard
+Accuracy Sensor,Data Accuracy,title_min_10,PASSED,critical,27 chars,≥10 chars,Titles should be at least 10 characters
+Accuracy Sensor,Data Accuracy,title_max_150,PASSED,error,100 chars,≤150 chars,Titles should be concise (under 150 chars)
+Accuracy Sensor,Data Accuracy,title_avg_40,PASSED,error,70.2 chars,≥40 chars,Average title length indicates quality headlines
+Accuracy Sensor,Data Accuracy,title_quality_50pct,PASSED,error,98.0%,≥50%,Only 239 of 244 titles meet quality standard
+Accuracy Sensor,Data Accuracy,word_count_min_50,FAILED,critical,42 words,≥50 words,Articles should contain at least 50 words
+Accuracy Sensor,Data Accuracy,word_count_avg_250,PASSED,error,298 words,≥250 words,Average word count indicates content depth
+Accuracy Sensor,Data Accuracy,word_count_quality_50pct,PASSED,error,63.9%,≥50%,Only 156 of 244 articles have 250+ words
+Uniqueness Sensor,Data Uniqueness,url_100_unique,PASSED,critical,0 duplicates (100.00% unique),0 duplicates (100% unique),CRITICAL: Found 0 duplicate URLs - each article must have unique URL
+Uniqueness Sensor,Data Uniqueness,content_100_unique,PASSED,critical,0 duplicates (100.00% unique),0 duplicates (100% unique),CRITICAL: Found 0 duplicate articles - plagiarism or duplication issue
+Uniqueness Sensor,Data Uniqueness,title_98_unique,PASSED,error,0 duplicates (100.00% unique),≤2% duplicates (98%+ unique),Found 0 duplicate titles
+Consistency Sensor,Data Consistency,category_95_valid,FAILED,warning,84.43% valid (38 invalid),≥95% valid,"Invalid categories found: Ameera, Rejogja, En, Kolom, Esgnow"
+Consistency Sensor,Data Consistency,title_content_correlation,PASSED,warning,0.007 (weak),>0 (positive),Title and content lengths should show positive correlation
+Consistency Sensor,Data Consistency,title_wordcount_correlation,PASSED,warning,0.018 (weak),>0 (positive),Title length should show positive correlation with word count
+Statistical Sensor,Statistical Quality,outliers_under_15pct,PASSED,warning,2.87% (7 articles),<15%,"Outliers: 0 too short, 7 too long"
+Statistical Sensor,Statistical Quality,skewness_reasonable,PASSED,warning,0.947,-2 to 2,High skewness indicates unbalanced distribution
+Statistical Sensor,Statistical Quality,content_consistency,PASSED,warning,41.0% (moderate),<70%,High variation indicates inconsistent article lengths

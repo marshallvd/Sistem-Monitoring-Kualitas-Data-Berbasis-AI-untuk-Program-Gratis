@@ -1,0 +1,3 @@
+# Soda Configuration for MBG Data
+data_source mbg_data:
+  type: pandas

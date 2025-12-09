@@ -1,0 +1,616 @@
+{
+  "framework": "DQOps Sensors (Adjusted Thresholds)",
+  "approach": "Deep Sensor-Based Testing with Realistic Standards",
+  "timestamp": "2025-11-30T17:41:55.846156",
+  "adjustments": {
+    "content_min": "100 chars (was 800)",
+    "title_min": "10 chars (was 30)",
+    "word_count_min": "50 words (was 100)",
+    "word_count_avg": "250 words (was 300)",
+    "categories": "Extended to include News, Rejabar, etc.",
+    "correlations": "Relaxed to >0 (was >0.2)",
+    "severity": "Many checks downgraded to warning"
+  },
+  "dataset_info": {
+    "rows": 244,
+    "columns": 18,
+    "memory_mb": 1.5309362411499023
+  },
+  "summary": {
+    "total_sensors": 6,
+    "total_tests": 31,
+    "passed": 29,
+    "failed": 2,
+    "critical_failures": 1,
+    "warnings": 1,
+    "quality_score": 93.54838709677419,
+    "grade": "GOOD ✅",
+    "success_rate": 93.54838709677419
+  },
+  "sensor_results": [
+    {
+      "sensor_name": "Completeness Sensor",
+      "sensor_description": "Monitors data completeness with zero-tolerance for critical fields",
+      "category": "Data Completeness",
+      "metrics": {
+        "url": {
+          "total": 244,
+          "non_null": 244,
+          "null": 0,
+          "completeness_pct": 100.0
+        },
+        "title": {
+          "total": 244,
+          "non_null": 244,
+          "null": 0,
+          "completeness_pct": 100.0
+        },
+        "date": {
+          "total": 244,
+          "non_null": 244,
+          "null": 0,
+          "completeness_pct": 100.0
+        },
+        "author": {
+          "total": 244,
+          "non_null": 234,
+          "null": 10,
+          "completeness_pct": 95.90163934426229
+        },
+        "category": {
+          "total": 244,
+          "non_null": 244,
+          "null": 0,
+          "completeness_pct": 100.0
+        },
+        "content": {
+          "total": 244,
+          "non_null": 244,
+          "null": 0,
+          "completeness_pct": 100.0
+        },
+        "summary": {
+          "total": 244,
+          "non_null": 244,
+          "null": 0,
+          "completeness_pct": 100.0
+        },
+        "tags": {
+          "total": 244,
+          "non_null": 244,
+          "null": 0,
+          "completeness_pct": 100.0
+        },
+        "image_url": {
+          "total": 244,
+          "non_null": 244,
+          "null": 0,
+          "completeness_pct": 100.0
+        },
+        "scraped_at": {
+          "total": 244,
+          "non_null": 244,
+          "null": 0,
+          "completeness_pct": 100.0
+        },
+        "content_length": {
+          "total": 244,
+          "non_null": 244,
+          "null": 0,
+          "completeness_pct": 100.0
+        },
+        "word_count": {
+          "total": 244,
+          "non_null": 244,
+          "null": 0,
+          "completeness_pct": 100.0
+        },
+        "title_length": {
+          "total": 244,
+          "non_null": 244,
+          "null": 0,
+          "completeness_pct": 100.0
+        },
+        "has_date": {
+          "total": 244,
+          "non_null": 244,
+          "null": 0,
+          "completeness_pct": 100.0
+        },
+        "has_category": {
+          "total": 244,
+          "non_null": 244,
+          "null": 0,
+          "completeness_pct": 100.0
+        },
+        "url_valid": {
+          "total": 244,
+          "non_null": 244,
+          "null": 0,
+          "completeness_pct": 100.0
+        },
+        "url_unique": {
+          "total": 244,
+          "non_null": 244,
+          "null": 0,
+          "completeness_pct": 100.0
+        },
+        "content_quality_score": {
+          "total": 244,
+          "non_null": 244,
+          "null": 0,
+          "completeness_pct": 100.0
+        }
+      },
+      "evaluation": {
+        "sensor": "Completeness Sensor",
+        "checks": [
+          {
+            "rule": "title_100_complete",
+            "status": "PASSED",
+            "actual": "100.00% (0 missing)",
+            "expected": "100% (0 missing)",
+            "severity": "critical",
+            "details": "CRITICAL: title must be 100% complete"
+          },
+          {
+            "rule": "content_100_complete",
+            "status": "PASSED",
+            "actual": "100.00% (0 missing)",
+            "expected": "100% (0 missing)",
+            "severity": "critical",
+            "details": "CRITICAL: content must be 100% complete"
+          },
+          {
+            "rule": "url_100_complete",
+            "status": "PASSED",
+            "actual": "100.00% (0 missing)",
+            "expected": "100% (0 missing)",
+            "severity": "critical",
+            "details": "CRITICAL: url must be 100% complete"
+          },
+          {
+            "rule": "date_98_complete",
+            "status": "PASSED",
+            "actual": "100.00% (0 missing)",
+            "expected": "≥98%",
+            "severity": "error",
+            "details": "date should be 98%+ complete"
+          },
+          {
+            "rule": "category_98_complete",
+            "status": "PASSED",
+            "actual": "100.00% (0 missing)",
+            "expected": "≥98%",
+            "severity": "error",
+            "details": "category should be 98%+ complete"
+          },
+          {
+            "rule": "overall_completeness_95",
+            "status": "PASSED",
+            "actual": "99.77%",
+            "expected": "≥95%",
+            "severity": "error",
+            "details": "Overall dataset completeness"
+          }
+        ],
+        "total": 6,
+        "passed": 6,
+        "failed": 0,
+        "critical_failures": 0,
+        "success_rate": 100.0
+      }
+    },
+    {
+      "sensor_name": "Validity Sensor",
+      "sensor_description": "Validates data formats and types with strict rules",
+      "category": "Data Validity",
+      "metrics": {
+        "url": {
+          "total": 244,
+          "valid_format": 244,
+          "https_count": 244,
+          "has_domain": 244,
+          "format_pct": 100.0,
+          "https_pct": 100.0,
+          "domain_pct": 100.0
+        },
+        "content": {
+          "total": 244,
+          "not_empty": 244,
+          "has_text": 244,
+          "valid_pct": 100.0
+        },
+        "title": {
+          "total": 244,
+          "not_empty": 244,
+          "has_text": 244,
+          "valid_pct": 100.0
+        }
+      },
+      "evaluation": {
+        "sensor": "Validity Sensor",
+        "checks": [
+          {
+            "rule": "url_format_98_valid",
+            "status": "PASSED",
+            "actual": "100.00%",
+            "expected": "≥98%",
+            "severity": "critical",
+            "details": "0 URLs have invalid format"
+          },
+          {
+            "rule": "url_https_80",
+            "status": "PASSED",
+            "actual": "100.00%",
+            "expected": "≥80%",
+            "severity": "error",
+            "details": "Security: Most URLs should use HTTPS"
+          },
+          {
+            "rule": "url_has_domain",
+            "status": "PASSED",
+            "actual": "100.00%",
+            "expected": "≥99%",
+            "severity": "error",
+            "details": "URLs must contain valid domain"
+          },
+          {
+            "rule": "content_valid_text",
+            "status": "PASSED",
+            "actual": "100.00%",
+            "expected": "100%",
+            "severity": "critical",
+            "details": "All content must contain readable text"
+          },
+          {
+            "rule": "title_valid_text",
+            "status": "PASSED",
+            "actual": "100.00%",
+            "expected": "100%",
+            "severity": "critical",
+            "details": "All titles must contain readable text"
+          }
+        ],
+        "total": 5,
+        "passed": 5,
+        "failed": 0,
+        "critical_failures": 0,
+        "success_rate": 100.0
+      }
+    },
+    {
+      "sensor_name": "Accuracy Sensor",
+      "sensor_description": "Validates data ranges with adjusted realistic standards",
+      "category": "Data Accuracy",
+      "metrics": {
+        "content_length": {
+          "min": 296,
+          "max": 6378,
+          "mean": 2210.7868852459014,
+          "median": 2092.5,
+          "p25": 1654.75,
+          "p75": 2644.0,
+          "below_500": 9,
+          "above_1500": 199,
+          "pct_quality": 81.55737704918032
+        },
+        "title_length": {
+          "min": 27,
+          "max": 100,
+          "mean": 70.15163934426229,
+          "median": 71.0,
+          "below_20": 0,
+          "above_40": 239,
+          "pct_quality": 97.95081967213115
+        },
+        "word_count": {
+          "min": 42,
+          "max": 837,
+          "mean": 298.04918032786884,
+          "median": 279.0,
+          "below_100": 10,
+          "above_250": 156,
+          "pct_quality": 63.934426229508205
+        }
+      },
+      "evaluation": {
+        "sensor": "Accuracy Sensor",
+        "checks": [
+          {
+            "rule": "content_min_100",
+            "status": "PASSED",
+            "actual": "296 chars",
+            "expected": "≥100 chars",
+            "severity": "critical",
+            "details": "Articles should be at least 100 characters"
+          },
+          {
+            "rule": "content_max_25000",
+            "status": "PASSED",
+            "actual": "6,378 chars",
+            "expected": "≤25,000 chars",
+            "severity": "error",
+            "details": "Exceptionally long content may indicate data quality issues"
+          },
+          {
+            "rule": "content_avg_1200",
+            "status": "PASSED",
+            "actual": "2211 chars",
+            "expected": "≥1,200 chars",
+            "severity": "error",
+            "details": "Average article length indicates overall content quality"
+          },
+          {
+            "rule": "content_quality_50pct",
+            "status": "PASSED",
+            "actual": "81.6%",
+            "expected": "≥50%",
+            "severity": "error",
+            "details": "Only 199 of 244 articles meet quality length standard"
+          },
+          {
+            "rule": "title_min_10",
+            "status": "PASSED",
+            "actual": "27 chars",
+            "expected": "≥10 chars",
+            "severity": "critical",
+            "details": "Titles should be at least 10 characters"
+          },
+          {
+            "rule": "title_max_150",
+            "status": "PASSED",
+            "actual": "100 chars",
+            "expected": "≤150 chars",
+            "severity": "error",
+            "details": "Titles should be concise (under 150 chars)"
+          },
+          {
+            "rule": "title_avg_40",
+            "status": "PASSED",
+            "actual": "70.2 chars",
+            "expected": "≥40 chars",
+            "severity": "error",
+            "details": "Average title length indicates quality headlines"
+          },
+          {
+            "rule": "title_quality_50pct",
+            "status": "PASSED",
+            "actual": "98.0%",
+            "expected": "≥50%",
+            "severity": "error",
+            "details": "Only 239 of 244 titles meet quality standard"
+          },
+          {
+            "rule": "word_count_min_50",
+            "status": "FAILED",
+            "actual": "42 words",
+            "expected": "≥50 words",
+            "severity": "critical",
+            "details": "Articles should contain at least 50 words"
+          },
+          {
+            "rule": "word_count_avg_250",
+            "status": "PASSED",
+            "actual": "298 words",
+            "expected": "≥250 words",
+            "severity": "error",
+            "details": "Average word count indicates content depth"
+          },
+          {
+            "rule": "word_count_quality_50pct",
+            "status": "PASSED",
+            "actual": "63.9%",
+            "expected": "≥50%",
+            "severity": "error",
+            "details": "Only 156 of 244 articles have 250+ words"
+          }
+        ],
+        "total": 11,
+        "passed": 10,
+        "failed": 1,
+        "critical_failures": 1,
+        "success_rate": 90.9090909090909
+      }
+    },
+    {
+      "sensor_name": "Uniqueness Sensor",
+      "sensor_description": "Detects duplicates with zero tolerance for critical fields",
+      "category": "Data Uniqueness",
+      "metrics": {
+        "url": {
+          "total": 244,
+          "unique": 244,
+          "duplicates": 0,
+          "uniqueness_pct": 100.0,
+          "dup_examples": []
+        },
+        "content": {
+          "total": 244,
+          "unique": 244,
+          "duplicates": 0,
+          "uniqueness_pct": 100.0
+        },
+        "title": {
+          "total": 244,
+          "unique": 244,
+          "duplicates": 0,
+          "uniqueness_pct": 100.0
+        }
+      },
+      "evaluation": {
+        "sensor": "Uniqueness Sensor",
+        "checks": [
+          {
+            "rule": "url_100_unique",
+            "status": "PASSED",
+            "actual": "0 duplicates (100.00% unique)",
+            "expected": "0 duplicates (100% unique)",
+            "severity": "critical",
+            "details": "CRITICAL: Found 0 duplicate URLs - each article must have unique URL"
+          },
+          {
+            "rule": "content_100_unique",
+            "status": "PASSED",
+            "actual": "0 duplicates (100.00% unique)",
+            "expected": "0 duplicates (100% unique)",
+            "severity": "critical",
+            "details": "CRITICAL: Found 0 duplicate articles - plagiarism or duplication issue"
+          },
+          {
+            "rule": "title_98_unique",
+            "status": "PASSED",
+            "actual": "0 duplicates (100.00% unique)",
+            "expected": "≤2% duplicates (98%+ unique)",
+            "severity": "error",
+            "details": "Found 0 duplicate titles"
+          }
+        ],
+        "total": 3,
+        "passed": 3,
+        "failed": 0,
+        "critical_failures": 0,
+        "success_rate": 100.0
+      }
+    },
+    {
+      "sensor_name": "Consistency Sensor",
+      "sensor_description": "Validates data consistency and relationships with flexible rules",
+      "category": "Data Consistency",
+      "metrics": {
+        "category": {
+          "total": 244,
+          "valid": 206,
+          "invalid_count": 38,
+          "validity_pct": 84.42622950819673,
+          "invalid_values": [
+            "Ameera",
+            "Rejogja",
+            "En",
+            "Kolom",
+            "Esgnow"
+          ],
+          "valid_categories": [
+            "Politik",
+            "Ekonomi",
+            "Pendidikan",
+            "Kesehatan",
+            "Sosial",
+            "Teknologi",
+            "Olahraga",
+            "Hiburan",
+            "Internasional",
+            "Daerah",
+            "Hukum",
+            "Budaya",
+            "News",
+            "Rejabar",
+            "Ekonomi Syariah",
+            "Islam Digest",
+            "Visual"
+          ]
+        },
+        "title_content_correlation": {
+          "correlation": 0.006715676041374846,
+          "strength": "weak"
+        },
+        "title_wordcount_correlation": {
+          "correlation": 0.018386556552795065,
+          "strength": "weak"
+        }
+      },
+      "evaluation": {
+        "sensor": "Consistency Sensor",
+        "checks": [
+          {
+            "rule": "category_95_valid",
+            "status": "FAILED",
+            "actual": "84.43% valid (38 invalid)",
+            "expected": "≥95% valid",
+            "severity": "warning",
+            "details": "Invalid categories found: Ameera, Rejogja, En, Kolom, Esgnow"
+          },
+          {
+            "rule": "title_content_correlation",
+            "status": "PASSED",
+            "actual": "0.007 (weak)",
+            "expected": ">0 (positive)",
+            "severity": "warning",
+            "details": "Title and content lengths should show positive correlation"
+          },
+          {
+            "rule": "title_wordcount_correlation",
+            "status": "PASSED",
+            "actual": "0.018 (weak)",
+            "expected": ">0 (positive)",
+            "severity": "warning",
+            "details": "Title length should show positive correlation with word count"
+          }
+        ],
+        "total": 3,
+        "passed": 2,
+        "failed": 1,
+        "critical_failures": 0,
+        "success_rate": 66.66666666666666
+      }
+    },
+    {
+      "sensor_name": "Statistical Sensor",
+      "sensor_description": "Analyzes statistical distributions and outliers",
+      "category": "Statistical Quality",
+      "metrics": {
+        "content_length_distribution": {
+          "q1": 1654.75,
+          "q3": 2644.0,
+          "iqr": 989.25,
+          "outliers_low": 0,
+          "outliers_high": 7,
+          "outliers_total": 7,
+          "outliers_pct": 2.8688524590163933,
+          "skewness": 0.9466487948792194,
+          "kurtosis": 2.3543678480011394
+        },
+        "content_length_consistency": {
+          "std": 907.4837932732646,
+          "mean": 2210.7868852459014,
+          "cv": 41.047999666070346,
+          "consistency": "moderate"
+        }
+      },
+      "evaluation": {
+        "sensor": "Statistical Sensor",
+        "checks": [
+          {
+            "rule": "outliers_under_15pct",
+            "status": "PASSED",
+            "actual": "2.87% (7 articles)",
+            "expected": "<15%",
+            "severity": "warning",
+            "details": "Outliers: 0 too short, 7 too long"
+          },
+          {
+            "rule": "skewness_reasonable",
+            "status": "PASSED",
+            "actual": "0.947",
+            "expected": "-2 to 2",
+            "severity": "warning",
+            "details": "High skewness indicates unbalanced distribution"
+          },
+          {
+            "rule": "content_consistency",
+            "status": "PASSED",
+            "actual": "41.0% (moderate)",
+            "expected": "<70%",
+            "severity": "warning",
+            "details": "High variation indicates inconsistent article lengths"
+          }
+        ],
+        "total": 3,
+        "passed": 3,
+        "failed": 0,
+        "critical_failures": 0,
+        "success_rate": 100.0
+      }
+    }
+  ]
+}

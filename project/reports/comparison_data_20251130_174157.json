@@ -1,0 +1,133 @@
+{
+  "timestamp": "2025-11-30T17:41:57.812047",
+  "report_id": "20251130_174157",
+  "soda_core": {
+    "framework": "Soda Core",
+    "approach": "Data Observability & Continuous Monitoring",
+    "total_checks": 26,
+    "passed": 24,
+    "failed": 2,
+    "quality_score": 92.3076923076923,
+    "grade": "EXCELLENT 🌟",
+    "success_rate": 92.3076923076923,
+    "dimensions": {
+      "Completeness": {
+        "passed": 7,
+        "total": 7,
+        "score": 100.0
+      },
+      "Validity": {
+        "passed": 3,
+        "total": 3,
+        "score": 100.0
+      },
+      "Accuracy": {
+        "passed": 9,
+        "total": 10,
+        "score": 90.0
+      },
+      "Uniqueness": {
+        "passed": 4,
+        "total": 4,
+        "score": 100.0
+      },
+      "Consistency": {
+        "passed": 1,
+        "total": 2,
+        "score": 50.0
+      }
+    }
+  },
+  "dqops_sensors": {
+    "framework": "DQOps Sensors",
+    "approach": "Deep Sensor-Based Testing",
+    "total_tests": 31,
+    "passed": 29,
+    "failed": 2,
+    "critical_failures": 1,
+    "quality_score": 93.54838709677419,
+    "success_rate": 93.54838709677419,
+    "sensors": {
+      "Completeness Sensor": {
+        "passed": 6,
+        "total": 6,
+        "score": 100.0,
+        "critical": 0
+      },
+      "Validity Sensor": {
+        "passed": 5,
+        "total": 5,
+        "score": 100.0,
+        "critical": 0
+      },
+      "Accuracy Sensor": {
+        "passed": 10,
+        "total": 11,
+        "score": 90.9090909090909,
+        "critical": 1
+      },
+      "Uniqueness Sensor": {
+        "passed": 3,
+        "total": 3,
+        "score": 100.0,
+        "critical": 0
+      },
+      "Consistency Sensor": {
+        "passed": 2,
+        "total": 3,
+        "score": 66.66666666666666,
+        "critical": 0
+      },
+      "Statistical Sensor": {
+        "passed": 3,
+        "total": 3,
+        "score": 100.0,
+        "critical": 0
+      }
+    }
+  },
+  "combined": {
+    "weighted_score": 93.05210918114145,
+    "grade": "VERY GOOD ✅",
+    "grade_color": "#2ecc71",
+    "total_validations": 57,
+    "total_passed": 53,
+    "total_failed": 4,
+    "success_rate": 92.98245614035088
+  },
+  "issues": [
+    {
+      "source": "Soda Core",
+      "dimension": "Accuracy",
+      "check": "Word count min ≥50 words",
+      "actual": "42 words",
+      "expected": "≥50",
+      "severity": "error"
+    },
+    {
+      "source": "Soda Core",
+      "dimension": "Consistency",
+      "check": "Category values valid",
+      "actual": "38 invalid",
+      "expected": "0",
+      "severity": "warn"
+    },
+    {
+      "source": "Accuracy Sensor",
+      "dimension": "Data Accuracy",
+      "check": "word_count_min_50",
+      "actual": "42 words",
+      "expected": "≥50 words",
+      "severity": "critical"
+    },
+    {
+      "source": "Consistency Sensor",
+      "dimension": "Data Consistency",
+      "check": "category_95_valid",
+      "actual": "84.43% valid (38 invalid)",
+      "expected": "≥95% valid",
+      "severity": "warning"
+    }
+  ],
+  "issue_count": 4
+}

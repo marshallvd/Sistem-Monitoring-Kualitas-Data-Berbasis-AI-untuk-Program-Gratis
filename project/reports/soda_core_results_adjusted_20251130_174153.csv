@@ -1,0 +1,27 @@
+﻿dimension,check,status,actual,expected,severity,details
+Completeness,Dataset not empty,PASSED,244 rows,> 0 rows,error,
+Completeness,Title 100% complete,PASSED,244/244 (100.00%),100%,error,0 missing titles
+Completeness,Content 100% complete,PASSED,244/244 (100.00%),100%,error,0 missing content
+Completeness,URL 98%+ complete,PASSED,244/244 (100.00%),≥98%,warn,0 missing URLs
+Completeness,Date 95%+ complete,PASSED,244/244 (100.00%),≥95%,warn,0 missing dates
+Completeness,Category 90%+ complete,PASSED,244/244 (100.00%),≥90%,warn,0 missing categories
+Completeness,Complete records ≥85%,PASSED,244/244 (100.00%),≥85%,warn,0 incomplete records
+Validity,URL format 95%+ valid,PASSED,244/244 (100.00%),≥95%,error,0 invalid URL formats
+Validity,HTTPS usage ≥70%,PASSED,244/244 (100.00%),≥70%,warn,0 non-HTTPS URLs
+Validity,Content not empty/whitespace,PASSED,244/244,100%,error,0 empty/whitespace
+Accuracy,Content min ≥100 chars,PASSED,296 chars,≥100 chars,error,Shortest article: 296 chars
+Accuracy,"Content max ≤25,000 chars",PASSED,"6,378 chars","≤25,000",error,"Longest article: 6,378 chars"
+Accuracy,"Content avg ≥1,500 chars",PASSED,"2,210 chars","≥1,500",warn,"Average: 2,210 chars"
+Accuracy,"Content median ≥1,200 chars",PASSED,"2,092 chars","≥1,200",warn,
+Accuracy,Title min ≥10 chars,PASSED,27 chars,≥10,error,Shortest title: 27 chars
+Accuracy,Title max ≤150 chars,PASSED,100 chars,≤150,warn,
+Accuracy,Title avg ≥50 chars,PASSED,70 chars,≥50,warn,Average title length: 70 chars
+Accuracy,Word count min ≥50 words,FAILED,42 words,≥50,error,Shortest article: 42 words
+Accuracy,Word count avg ≥250 words,PASSED,298 words,≥250,error,Average word count: 298 words
+Accuracy,Quality content ≥40% (≥2000 chars),PASSED,136/244 (55.7%),≥40%,warn,55.7% meet long-form standard
+Uniqueness,URL 100% unique,PASSED,0 duplicates,0,error,Found 0 duplicate URLs
+Uniqueness,Content 100% unique,PASSED,0 duplicates (0.00%),0,error,Found 0 exact content duplicates
+Uniqueness,Title duplication <1%,PASSED,0 duplicates (0.00%),<1%,warn,Found 0 duplicate titles
+Uniqueness,Near-duplicate titles <3%,PASSED,2 similar (0.82%),<3%,warn,Titles with same first 50 chars: 2
+Consistency,Category values valid,FAILED,38 invalid,0,warn,"Invalid: ['Ameera', 'Rejogja', 'En', 'Kolom', 'Esgnow']"
+Consistency,Title-Content correlation >0.0,PASSED,0.007,>0.0,warn,Correlation shows positive relationship

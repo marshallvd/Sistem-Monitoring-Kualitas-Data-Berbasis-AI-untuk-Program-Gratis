@@ -1,0 +1,125 @@
+# Data Quality Checks for MBG Dataset (STRICT MODE)
+# Generated: 2025-11-30 17:41:50
+# Dataset: 244 rows × 18 columns
+# Note: Stricter thresholds to identify real quality issues
+
+checks for mbg_data:
+
+  # ============================================================================
+  # DIMENSION 1: COMPLETENESS (100% for critical fields)
+  # ============================================================================
+
+  - row_count > 0:
+      name: Dataset must not be empty
+      
+  - missing_count(title) = 0:
+      name: Title must be 100% complete (CRITICAL)
+      
+  - missing_count(content) = 0:
+      name: Content must be 100% complete (CRITICAL)
+      
+  - missing_percent(url) = 0:
+      name: URL must be 100% complete (STRICT)
+      
+  - missing_percent(date) < 5%:
+      name: Date must be 95%+ complete
+      warn: when > 2%
+      
+  - missing_percent(category) < 10%:
+      name: Category must be 90%+ complete
+      warn: when > 5%
+
+  # ============================================================================
+  # DIMENSION 2: VALIDITY (Format correctness)
+  # ============================================================================
+
+  - invalid_count(url) = 0:
+      valid format: url
+      name: All URLs must have valid format (STRICT)
+      
+  - invalid_percent(date) < 5%:
+      valid format: date
+      name: Date format must be 95%+ valid
+      warn: when > 2%
+
+  # ============================================================================
+  # DIMENSION 3: ACCURACY (Realistic content ranges)
+  # ============================================================================
+
+  - min(content_length):
+      fail: when < 500
+      warn: when < 800
+      name: Content minimum 500 characters (STRICT)
+      
+  - max(content_length):
+      fail: when > 30000
+      warn: when > 20000
+      name: Content maximum 30k characters (reasonable limit)
+      
+  - avg(content_length):
+      fail: when < 1500
+      warn: when < 2000
+      name: Average content must be 1500+ characters (quality threshold)
+      
+  - min(title_length):
+      fail: when < 20
+      warn: when < 30
+      name: Title minimum 20 characters (STRICT)
+      
+  - max(title_length):
+      fail: when > 200
+      warn: when > 150
+      name: Title maximum 200 characters
+      
+  - avg(title_length):
+      fail: when < 40
+      warn: when < 50
+      name: Average title 40+ characters (quality threshold)
+      
+  - min(word_count):
+      fail: when < 50
+      warn: when < 100
+      name: Minimum 50 words per article
+      
+  - avg(word_count):
+      fail: when < 200
+      warn: when < 300
+      name: Average 200+ words per article (quality standard)
+
+  # ============================================================================
+  # DIMENSION 4: UNIQUENESS (No duplicates allowed)
+  # ============================================================================
+
+  - duplicate_count(url) = 0:
+      name: URLs must be 100% unique (STRICT)
+      
+  - duplicate_percent(content) = 0:
+      name: Content must be 100% unique (STRICT)
+      
+  - duplicate_percent(title) < 2%:
+      name: Title duplication must be under 2%
+      warn: when > 1%
+
+  # ============================================================================
+  # DIMENSION 5: CONSISTENCY (Cross-field validation)
+  # ============================================================================
+  
+  - values in (category) must exist in ['Politik', 'Ekonomi', 'Pendidikan', 'Kesehatan', 'Sosial']:
+      name: Category values must be from valid list
+      warn: when other values found
+      
+  # ============================================================================
+  # DIMENSION 6: SCHEMA VALIDATION
+  # ============================================================================
+
+  - schema:
+      name: Schema validation (STRICT)
+      fail:
+        when required column missing:
+          - title
+          - content
+          - url
+        when wrong column type:
+          title: text
+          content: text
+          url: text

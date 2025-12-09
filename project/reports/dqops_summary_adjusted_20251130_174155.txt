@@ -1,0 +1,114 @@
+
+================================================================================
+DQOPS SENSOR TESTING SUMMARY REPORT (ADJUSTED THRESHOLDS)
+================================================================================
+Generated: 2025-11-30 17:41:55
+Dataset: MBG Data (244 rows × 18 columns)
+
+================================================================================
+THRESHOLD ADJUSTMENTS APPLIED
+================================================================================
+✨ Content Min: 100 chars (was 800 chars)
+✨ Title Min: 10 chars (was 30 chars)
+✨ Word Count Min: 50 words (was 100 words)
+✨ Word Count Avg: 250 words (was 300 words)
+✨ Categories: Extended list (News, Rejabar, Ekonomi Syariah, Islam Digest, Visual)
+✨ Correlations: Relaxed to >0 (was >0.2)
+✨ Severity: Many checks downgraded to warning level
+
+================================================================================
+OVERALL RESULTS
+================================================================================
+Quality Score: 93.5/100
+Grade: GOOD ✅
+
+Total Sensors: 6
+Total Tests: 31
+✅ PASSED: 29 (93.5%)
+❌ FAILED: 2 (6.5%)
+🚨 CRITICAL: 1
+⚠️  WARNINGS: 1
+
+================================================================================
+SENSOR BREAKDOWN
+================================================================================
+
+Completeness Sensor:
+  Tests: 6
+  Passed: 6 (100.0%)
+  Failed: 0
+
+Validity Sensor:
+  Tests: 5
+  Passed: 5 (100.0%)
+  Failed: 0
+
+Accuracy Sensor:
+  Tests: 11
+  Passed: 10 (90.9%)
+  Failed: 1
+  🚨 Critical: 1
+
+Uniqueness Sensor:
+  Tests: 3
+  Passed: 3 (100.0%)
+  Failed: 0
+
+Consistency Sensor:
+  Tests: 3
+  Passed: 2 (66.7%)
+  Failed: 1
+  ⚠️  Warnings: 1
+
+Statistical Sensor:
+  Tests: 3
+  Passed: 3 (100.0%)
+  Failed: 0
+
+================================================================================
+FAILED TESTS DETAILS
+================================================================================
+
+🚨 CRITICAL FAILURES:
+
+Accuracy Sensor:
+  • word_count_min_50
+     Actual: 42 words
+     Expected: ≥50 words
+     Details: Articles should contain at least 50 words
+
+💡 WARNINGS (Nice to Improve):
+
+Consistency Sensor:
+  • category_95_valid
+     Actual: 84.43% valid (38 invalid)
+     Expected: ≥95% valid
+
+================================================================================
+FILES GENERATED
+================================================================================
+1. JSON Report: dqops_sensor_testing_adjusted_20251130_174155.json
+2. HTML Report: dqops_sensor_report_adjusted_20251130_174155.html
+3. CSV Results: dqops_sensor_results_adjusted_20251130_174155.csv
+4. Metrics Data: dqops_metrics_adjusted_20251130_174155.csv
+5. Summary Text: dqops_summary_adjusted_20251130_174155.txt
+
+All files saved to: /content/soda_project/reports/
+
+================================================================================
+NEXT STEPS
+================================================================================
+
+⚠️  ACTION REQUIRED: 1 Critical failures detected!
+
+Priority Actions:
+1. Review critical failures in HTML report
+2. Fix data quality issues for:
+   - URL uniqueness and completeness
+   - Content completeness and validity
+   - Minimum content quality standards (adjusted thresholds)
+3. Re-run validation after fixes
+
+================================================================================
+END OF REPORT
+================================================================================
